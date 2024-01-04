@@ -1,14 +1,5 @@
 FILE=package.json
 
-# This could be used to just auto clone
-# You would use this like `cratovite ssh-url.git`
-# uncomment these 3 lines to use it like that.
-
-# reponame=${1##*/}
-# reponame=${reponame%.git}
-
-# git clone $1 && cd $reponame
-
 # npm install
 if test -f "$FILE"; then
     echo ""
@@ -16,8 +7,6 @@ if test -f "$FILE"; then
     npm install 
     else return;
 fi
-
-git checkout -b vite
 
 # install vite stuff
 npm install vite @vitejs/plugin-react vitest --save-dev
@@ -88,7 +77,3 @@ echo "eg: "scripts": {
     sed -i '' '/<\/body>/i\
 <script type="module" src="/src/index.jsx"></script>\
 ' index.html
-
-#git stuff
-    git add .
-    git commit -m "migrate from CRA to Vite via script"
