@@ -63,17 +63,17 @@ echo "eg: "scripts": {
 # rename all react files with .js extention to have .jsx
     # mv src/App.js src/App.jsx
     # mv src/index.js src/index.jsx
-    (zmv 'src/(*).js' 'src/$1.jsx') || true
+(mv 'src/index.js' 'src/index.jsx') || true
 
-(zmv 'src/components/(*)/(*).js' 'src/components/$1/$2.jsx') || true
+(mv 'src/components/App/App.js' 'src/components/App/App.jsx') || true
 
 
 # remove all %PUBLIC_URL% from HTML file
-    sed -i '' -e "s/\%PUBLIC_URL\%//g" ./index.html
+sed -i '' -e "s/\%PUBLIC_URL\%//g" ./index.html
+sed -i '' -e 's,<script type="module" src="/src/index.jsx"></script>,,g' ./index.html
 
 # Add script to html
-# Wow. Bash skill++
 # <script type="module" src="/src/index.jsx"></script>
-    sed -i '' '/<\/body>/i\
+sed -i '' '/<\/body>/i\
 <script type="module" src="/src/index.jsx"></script>\
 ' index.html
